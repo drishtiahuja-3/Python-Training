@@ -22,9 +22,20 @@ class MongoDBhelper:
         self.collection = self.db[collection]
 
     def insert(self, document):
-        self.collection.insert_one(document)
+        result = self.collection.insert_one(document)
         print("Document is inserted in Collection:", self.collection.name)
+        #print("Result is:",result, result.__inserted_id)
+        return result 
     
     def fetch(self, query=""):
-        documents = self.collection.find()
+        documents = self.collection.find(query)
         return list(documents)
+    
+    def delete(self,query="" ):
+        result = self.collection.delete_one(query)
+        print("Result is:", result)
+
+    def update(self, document, query="" ):
+        document_to_update = {'$set':document}
+        result = self.collection.update_one(query, document_to_update)
+        print("Result is:", result)
