@@ -51,6 +51,16 @@
       /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       background: linear-gradient(to right, rgb(39, 76, 162), rgb(113, 175, 250))
     }
+    .new{
+      color: white;
+      font-size: 30px; 
+      display: flex; 
+      justify-content: center; 
+      text-align: center; 
+      background-color: darkblue;
+      margin: 0px; 
+      padding: 0px;
+    }
   </style>
 </head>
 
@@ -135,7 +145,7 @@
 
         <!-- Search form -->
         <form class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
-         <a href="/index" style="color: white;text-decoration: none;font-size: 20px; margin-left: 360px;">Log Out</a>
+         <a href="/" style="color: white;text-decoration: none;font-size: 20px; margin-left: 360px;">Log Out</a>
         </form>
       </div>
       <!-- Collapsible wrapper -->
@@ -143,7 +153,7 @@
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-  <p style="color: white; font-size: 30px; display: flex; justify-content: center; text-align: center; background-color: darkblue;margin: 0px; padding: 0px;">Welcome {{email}}</p>
+  <p >Welcome, {{email}}</p>
   <!--Form-->
   <section class="vh-100 bg-image" style="background-image: url('s1.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -156,7 +166,7 @@
                 <!--get post method 
                   get method will display data in url 
                   post method will not display data in url-->
-                <form action="/fetch-user" method="POST">
+                <form action="">
                     <div data-mdb-input-init class="form-outline mb-4">
                         <input type="text" id="name" class="form-control form-control-lg" name ="name"/>
                         <label class="form-label" for="form3Example3cg">Your Name</label>

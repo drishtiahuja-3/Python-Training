@@ -64,7 +64,7 @@ def fetch_user_from_db():
     result = db.fetch(query=user_data)
     
     if len(result)>0:
-         return render_template("Home.html", email=session['email'])
+         return render_template("Home.html", email = session['email'])
     else:
         return "User Not Found. Please Try Again"
 
