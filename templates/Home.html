@@ -91,7 +91,7 @@
             </a>
           </li>
           <li class="nav-item text-center mx-2 mx-lg-1">
-            <a class="nav-link" href="#!">
+            <a class="nav-link" href="/fetch-patients">
               <div>
                 <i class="fa fa-eye fa-lg mb-1"></i>
                 <span class="badge rounded-pill badge-notification bg-dark"></span>
@@ -121,7 +121,7 @@
         </ul>
         <!-- Left links -->
       
-          <h1 style="color: white;">DOCTOR'S APP</h1>
+          <h1 style="color: white;">Welcome Dr. {{name}}</h1>
 
         <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
             <li class="nav-item text-center mx-2 mx-lg-1">
@@ -153,7 +153,7 @@
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-  <p >Welcome, {{email}}</p>
+  <p class="new" >{{email}}</p>
   <!--Form-->
   <section class="vh-100 bg-image" style="background-image: url('s1.jpg');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -162,21 +162,47 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-5">Add Patient</h2>
+                <h2 class="text-uppercase text-center mb-5">Add New Patient</h2>
                 <!--get post method 
                   get method will display data in url 
                   post method will not display data in url-->
-                <form action="">
+                <form action="/add-patient" method="post">
                     <div data-mdb-input-init class="form-outline mb-4">
                         <input type="text" id="name" class="form-control form-control-lg" name ="name"/>
-                        <label class="form-label" for="form3Example3cg">Your Name</label>
+                        <label class="form-label" for="form3Example3cg">Name</label>
+                      </div>
+                      <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="phone" class="form-control form-control-lg" name ="phone"/>
+                        <label class="form-label" for="form3Example3cg">Phone</label>
                       </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" id="name" class="form-control form-control-lg" name ="email"/>
-                    <label class="form-label" for="form3Example3cg">Your Email</label>
+                    <input type="email" id="email" class="form-control form-control-lg" name ="email"/>
+                    <label class="form-label" for="form3Example3cg">Email</label>
                   </div>
 
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="number" id="age" class="form-control form-control-lg" name ="age"/>
+                    <label class="form-label" for="form3Example3cg">Age</label>
+                  </div>
+                  <h6>Gender</h6>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" checked="Male">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                     Female 
+                      </label>
+                  </div>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="address" class="form-control form-control-lg" name ="address"/>
+                    <label class="form-label" for="form3Example3cg">Address</label>
+                  </div>
+                  
                   <div class="d-flex justify-content-center">
                     <button type="submit" 
                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Add</button>

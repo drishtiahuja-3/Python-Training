@@ -6,8 +6,8 @@ import hashlib
 
 #create an object of flask which represents web application
 web_app = Flask("Doctor's App")
-db = MongoDBhelper()
-#db = MongoDBhelper(collection = doctors)
+db_helper = MongoDBhelper()
+#db_helper = MongoDBhelper(collection = doctors)
 
 @web_app.route("/")#decorator
 #/ means root or home page
@@ -43,7 +43,7 @@ def add_user_in_db():
         "created_on": datetime.datetime.now()
     }
     
-    result = db.insert(user_data)
+    result = db_helper.insert(user_data)
 #write data in session object this data can now be used in html files 
     session['user_id'] = str(result.inserted_id)
     session['name'] = user_data['name']
@@ -60,16 +60,65 @@ def fetch_user_from_db():
         "email": request.form["email"],
         "password": hashlib.sha256(request.form["password"].encode('utf-8')).hexdigest(),
     }
-
+    
     # Fetch user in DataBase i.e. MongoDB
-    result = db.fetch(query=user_data)
+    result = db_helper.fetch(query=user_data)
     
     if len(result)>0:
-         return render_template("Home.html", email = session['email'])
+        user_data = result[0] 
+        session['email'] = user_data['email']
+        session['name'] = user_data['name']
+        return render_template("Home.html", email = session['email'], name = session['name'])
     else:
         return "User Not Found. Please Try Again"
 
     
+@web_app.route("/add-patient", methods = ["POST"])#decorator
+def add_patient_in_db():
+    # create a dictionary with data from html register form 
+    patient_data ={
+        "name": request.form["name"],
+        "phone": request.form["phone"],
+        "email": request.form["email"],
+        "age": int(request.form["age"]),
+        "gender": request.form["gender"],
+        "address": request.form["address"],
+        "doctor_email": session['email'],
+        "doctor_name": session['name'],
+        "created_on": datetime.datetime.now()
+    }
+    db_helper.collection = db_helper.db["patients"]
+    result = db_helper.insert(patient_data)
+#write data in session object this data can now be used in html files 
+    #session['user_id'] = str(result.inserted_id)
+    #session['name'] = user_data['name']
+    #session['email'] = user_data['email']
+    message = "Success"
+    return message
+    #return render_template("Home.html", email = session['email'])
+
+
+@web_app.route("/fetch-patients")
+def fetch_patients_from_db():
+
+    # Create a Dictionary with Data from HTML Register Form
+    user_data = {
+        "doctor_email": session["email"]
+    }
+
+    db_helper.collection = db_helper.db["patients"]
+    # Fetch user in DataBase i.e. MongoDB
+    result = db_helper.fetch(query=user_data)
+
+    print("result:", result)
+    
+    if len(result)>0:
+        print(result)
+        return "Patients Fetched"
+    else:
+        return "Patients Not Found. Please Try Again"
+
+
 def main():
     web_app.secret_key = "doctors-app-key-v1"
     web_app.run()
